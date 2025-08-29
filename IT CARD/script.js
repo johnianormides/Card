@@ -1,399 +1,73 @@
-body {
-    background: #0b132b;
-    color: #e8eef6;
-    font-family: 'Inter', Arial, sans-serif;
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    box-sizing: border-box;
-}
+document.addEventListener('DOMContentLoaded', function () {
+    alert("Welcome! Thanks for visiting my profile.");
 
-.container {
-    display: flex;
-    flex-direction: row;
-    background: linear-gradient(135deg, #0b132b 80%, #5eead4 100%);
-    border-radius: 32px;
-    box-shadow: 0 12px 40px 0 rgba(11, 19, 43, 0.25), 0 1.5px 8px 0 #5eead4;
-    padding: 3rem 3.5rem;
-    max-width: 820px;
-    width: 100%;
-    min-height: 380px;
-    gap: 2.5rem;
-    transition: box-shadow 0.3s;
-    justify-content: center;
-    align-items: flex-start;
-    box-sizing: border-box;
-}
+    // COLOR CHANGE (On Button Click Only)
+    const nameHeading = document.querySelector('.name');
+    const colors = ['#5eead4', '#e8eef6', '#fff176', '#ffd700', '#ff80ab', '#b2ff59', '#40c4ff'];
+    let colorIndex = 0;
 
-.container:hover {
-    box-shadow: 0 16px 56px 0 rgba(11, 19, 43, 0.32), 0 2px 12px 0 #5eead4;
-}
+    document.getElementById('color-btn').addEventListener('click', function () {
+        nameHeading.style.transition = "color 0.8s ease-in-out";
+        nameHeading.style.color = colors[colorIndex];
+        colorIndex = (colorIndex + 1) % colors.length;
+    });
 
-.profile-area {
-    flex: 0 0 200px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: 1rem;
-    gap: 1.2rem;
-        position: relative;
-        height: auto;
-    min-width: 200px;
-    max-width: 200px;
-}
+  
+    // TYPING ANIMATION (Slows Down)
+    const staticText = document.getElementById('static-text');
+    const typedText = document.getElementById('typed-text');
+    const phrases = ["John Ian Ormides", "a 3rd Year BSIT Student"];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
 
-.accent-bar {
-    width: 60px;
-    height: 8px;
-    border-radius: 8px;
-    background: linear-gradient(90deg, #5eead4 0%, #e8eef6 100%);
-    margin: 0.5rem 0;
-}
+    // Blinking cursor
+    const cursor = document.createElement("span");
+    cursor.textContent = "|";
+    cursor.style.marginLeft = "5px";
+    cursor.style.animation = "blink 0.7s infinite";
+    typedText.after(cursor);
 
-.profile-pic {
-    width: 130px;
-    height: 130px;
-    object-fit: cover;
-    margin-bottom: 0.7rem;
-    border-radius: 50%;
-    box-shadow: 0 0 0 8px #fff, 0 4px 32px rgba(0,0,0,0.16);
-    transition: box-shadow 0.3s;
-}
+    // Blink keyframes
+    const style = document.createElement("style");
+    style.innerHTML = `
+        @keyframes blink { 
+            50% { opacity: 0; } 
+        }
+    `;
+    document.head.appendChild(style);
 
-.profile-pic:hover {
-    box-shadow: 0 0 0 12px #5eead4, 0 8px 40px rgba(94,234,212,0.18);
-}
+    function typeEffect() {
+        const currentPhrase = phrases[phraseIndex];
 
-.name {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.1rem;
-    font-weight: 700;
-    color: #5eead4;
-    margin: 0 0 0.5rem 0;
-    line-height: 1.2;
-    text-align: left;
-    letter-spacing: 1px;
-    transition: color 0.3s;
-        width: 100%;
-        min-width: 0;
-        max-width: 100%;
-        position: relative;
-        margin-top: 0.7rem;
-        z-index: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 0.2em;
-    min-height: 3.5em;
-}
+        if (!isDeleting) {
+            // Typing
+            typedText.textContent = currentPhrase.substring(0, charIndex + 1);
+            charIndex++;
+            if (charIndex === currentPhrase.length) {
+                isDeleting = true;
+                setTimeout(typeEffect, 1200); // pause before deleting
+                return;
+            }
+        } else {
+            // Deleting
+            typedText.textContent = currentPhrase.substring(0, charIndex - 1);
+            charIndex--;
+            if (charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+            }
+        }
 
-.main-area {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 2.2rem;
-}
+        // Speed control: start fast, slow down as it progresses
+        let progress = charIndex / currentPhrase.length;
+        let baseSpeed = isDeleting ? 40 : 70;   // starting speed
+        let maxExtra = isDeleting ? 50 : 150;   // how much slower it can get
+        let speed = baseSpeed + (progress * maxExtra);
 
-.bio-section {
-    margin-bottom: 2rem;
-    text-align: left;
-    background: rgba(11, 19, 43, 0.7);
-    border-radius: 16px;
-    padding: 1.2rem;
-    box-shadow: 0 2px 12px rgba(11,19,43,0.08);
-}
-
-#bio-text {
-    font-size: 1.13rem;
-    color: #e8eef6;
-    margin-bottom: 2rem;
-    transition: color 0.3s;
-    line-height: 1.6;
-}
-
-#color-btn {
-    background: linear-gradient(90deg, #5eead4 60%, #e8eef6 100%);
-    color: #0b132b;
-    border: none;
-    border-radius: 20px;
-    padding: 0.6rem 1.4rem;
-    font-size: 1.08rem;
-    cursor: pointer;
-    font-family: 'Inter', Arial, sans-serif;
-    font-weight: 700;
-    box-shadow: 0 2px 8px rgba(94,234,212,0.12);
-    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-}
-
-#color-btn:hover {
-    background: linear-gradient(90deg, #e8eef6 60%, #5eead4 100%);
-    color: #0b132b;
-    box-shadow: 0 4px 16px rgba(94,234,212,0.18);
-}
-
-.social-section h2 {
-    font-size: 1.2rem;
-    color: #5eead4;
-    margin-bottom: 2rem;
-    font-weight: bold;
-    text-align: left;
-}
-
-.social-links {
-    display: flex;
-    justify-content: flex-start;
-    gap: 1.1rem;
-    flex-wrap: wrap;
-}
-
-.social-btn {
-    background: #1c2541;
-    border-radius: 50%;
-    padding: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
-    width: 44px;
-    height: 44px;
-    box-shadow: 0 2px 8px rgba(11,19,43,0.08);
-    cursor: pointer;
-}
-
-.social-btn:hover {
-    background: #5eead4;
-    box-shadow: 0 4px 16px rgba(94,234,212,0.18);
-    transform: scale(1.08);
-}
-
-.social-btn img {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(11,19,43,0.10));
-}
-
-/* Tablet Responsiveness */
-@media (max-width: 768px) {
-    body {
-        padding: 0.5rem;
-    }
-    
-    .container {
-        flex-direction: column;
-        align-items: center;
-        padding: 2rem 1.5rem;
-        gap: 2rem;
-        border-radius: 24px;
-        min-height: unset;
-    }
-    
-    .profile-area {
-        flex: unset;
-        align-items: center;
-        justify-content: center;
-        padding: 1rem 0;
-        gap: 1rem;
-        position: relative;
-        min-width: 120px;
-        max-width: 120px;
-    }
-    
-    .profile-pic {
-        width: 120px;
-        height: 120px;
-        margin-bottom: 0;
-    }
-    .name {
-        min-height: 3.5em;
-        font-size: 1.1rem;
-        margin-bottom: 0.4rem;
-        text-align: center;
-        font-weight: 700;
-        color: #5eead4;
-        letter-spacing: 1px;
-        width: 180px;
-        min-width: 180px;
-        max-width: 180px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    }
-    
-    .main-area {
-        width: 100%;
-        gap: 1.8rem;
-    }
-    
-    .bio-section {
-        padding: 1rem;
-        margin-bottom: 1.5rem;
-        border-radius: 14px;
-    }
-    
-    #bio-text {
-        font-size: 1.1rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    .social-section h2 {
-        text-align: center;
-        margin-bottom: 1.5rem;
-    }
-    
-    .social-links {
-        justify-content: center;
+        setTimeout(typeEffect, speed);
     }
 
-
-/* Mobile Responsiveness */
-@media (max-width: 480px) {
-    body {
-        padding: 0.25rem;
-        min-height: 100vh;
-    }
-    
-    .container {
-        padding: 1.5rem 1rem;
-        gap: 1.5rem;
-        border-radius: 20px;
-        max-width: 380px;
-        min-width: 320px;
-        margin: 0 auto;
-    }
-    
-    .profile-area {
-        padding: 0.5rem 0;
-        gap: 0.8rem;
-    }
-    
-    .profile-pic {
-        width: 100px;
-        height: 100px;
-        margin-bottom: 0.5rem;
-        box-shadow: 0 0 0 6px #fff, 0 3px 24px rgba(0,0,0,0.16);
-    }
-    
-    .profile-pic:hover {
-        box-shadow: 0 0 0 8px #5eead4, 0 6px 32px rgba(94,234,212,0.18);
-    }
-    
-    .name {
-        font-size: 1.5rem;
-        margin-bottom: 0.3rem;
-        letter-spacing: 0.5px;
-    }
-    
-    .accent-bar {
-        width: 40px;
-        height: 5px;
-        margin: 0.3rem 0;
-    }
-    
-    .main-area {
-        gap: 1.3rem;
-    }
-    
-    .bio-section {
-        padding: 0.9rem 0.8rem;
-        margin-bottom: 1.2rem;
-        border-radius: 12px;
-    }
-    
-    #bio-text {
-        font-size: 1rem;
-        margin-bottom: 1.2rem;
-        line-height: 1.5;
-    }
-    
-    #color-btn {
-        font-size: 1rem;
-        padding: 0.6rem 1.2rem;
-        border-radius: 18px;
-    }
-    
-    .social-section h2 {
-        font-size: 1.1rem;
-        margin-bottom: 1.2rem;
-    }
-    
-    .social-links {
-        gap: 0.8rem;
-    }
-    
-    .social-btn {
-        width: 40px;
-        height: 40px;
-        padding: 0.4rem;
-    }
-    
-    .social-btn img {
-        width: 24px;
-        height: 24px;
-    }
-}
-
-/* Extra Small Mobile Devices */
-@media (max-width: 360px) {
-    .container {
-        padding: 1.2rem 0.8rem;
-        gap: 1.2rem;
-        border-radius: 16px;
-    }
-    
-    .profile-pic {
-        width: 90px;
-        height: 90px;
-    }
-    
-    .name {
-        font-size: 1.3rem;
-    }
-    
-    .accent-bar {
-        width: 35px;
-        height: 4px;
-    }
-    
-    .bio-section {
-        padding: 0.8rem 0.7rem;
-    }
-    
-    #bio-text {
-        font-size: 0.95rem;
-    }
-    
-    #color-btn {
-        font-size: 0.95rem;
-        padding: 0.55rem 1rem;
-    }
-    
-    .social-section h2 {
-        font-size: 1rem;
-    }
-    
-    .social-links {
-        gap: 0.7rem;
-    }
-    
-    .social-btn {
-        width: 36px;
-        height: 36px;
-        padding: 0.3rem;
-    }
-    
-    .social-btn img {
-        width: 22px;
-        height: 22px;
-    }
-}
+    staticText.textContent = "Hello I'm ";
+    typeEffect();
+});
