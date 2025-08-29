@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // COLOR CHANGE (On Button Click Only)
     const nameHeading = document.querySelector('.name');
-    const colors = ['#5eead4', '#e8eef6', '#fff176', '#ffd700', '#ff80ab', '#b2ff59', '#40c4ff'];
+    const colors = ['#e8eef6', '#fff176','#40c4ff', '#ffd700', '#ff80ab', '#b2ff59'];
     let colorIndex = 0;
 
     document.getElementById('color-btn').addEventListener('click', function () {
