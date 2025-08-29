@@ -22,17 +22,15 @@ document.addEventListener('DOMContentLoaded', function () {
     let isDeleting = false;
 
     // Blinking cursor
-    const cursor = document.createElement("span");
-    cursor.textContent = "|";
-    cursor.style.marginLeft = "5px";
-    cursor.style.animation = "blink 0.7s infinite";
-    typedText.after(cursor);
 
     // Blink keyframes
     const style = document.createElement("style");
     style.innerHTML = `
-        @keyframes blink { 
-            50% { opacity: 0; } 
+        .blink-cursor {
+            animation: blink 1s steps(1) infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
         }
     `;
     document.head.appendChild(style);
@@ -42,16 +40,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (!isDeleting) {
             // Typing
-            typedText.textContent = currentPhrase.substring(0, charIndex + 1);
+            typedText.innerHTML = currentPhrase.substring(0, charIndex + 1) + '<span class="blink-cursor">|</span>';
             charIndex++;
             if (charIndex === currentPhrase.length) {
                 isDeleting = true;
-                setTimeout(typeEffect, 1200);
+                setTimeout(typeEffect, 1200); // pause before deleting
                 return;
             }
         } else {
             // Deleting
-            typedText.textContent = currentPhrase.substring(0, charIndex - 1);
+            typedText.innerHTML = currentPhrase.substring(0, charIndex - 1) + '<span class="blink-cursor">|</span>';
             charIndex--;
             if (charIndex === 0) {
                 isDeleting = false;
