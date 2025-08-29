@@ -74,6 +74,10 @@ body {
     text-align: left;
     letter-spacing: 1px;
     transition: color 0.3s;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .main-area {
@@ -191,13 +195,17 @@ body {
     }
     
     .name {
-        font-size: 1.8rem;
+        font-size: 1.1rem;
+        margin-bottom: 0.4rem;
         text-align: center;
+        font-weight: 700;
+        color: #5eead4;
+        letter-spacing: 1px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     }
-    
-    .accent-bar {
-        width: 50px;
-        height: 6px;
     }
     
     .main-area {
@@ -224,7 +232,7 @@ body {
     .social-links {
         justify-content: center;
     }
-}
+
 
 /* Mobile Responsiveness */
 @media (max-width: 480px) {
