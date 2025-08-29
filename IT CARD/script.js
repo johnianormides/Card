@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // TYPING ANIMATION (Slows Down)
     const staticText = document.getElementById('static-text');
     const typedText = document.getElementById('typed-text');
-    const phrases = [" John Ian Ormides", "a 3rd Year BSIT Student"];
+    const phrases = [" John Ian Ormides", " a 3rd Year BSIT Student"];
     let phraseIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
