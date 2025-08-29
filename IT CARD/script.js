@@ -1,9 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     alert("Welcome! Thanks for visiting my profile.");
 
-    // =========================
     // COLOR CHANGE (On Button Click Only)
-    // =========================
     const nameHeading = document.querySelector('.name');
     const colors = ['#5eead4', '#e8eef6', '#fff176', '#ffd700', '#ff80ab', '#b2ff59', '#40c4ff'];
     let colorIndex = 0;
@@ -14,12 +12,11 @@ document.addEventListener('DOMContentLoaded', function () {
         colorIndex = (colorIndex + 1) % colors.length;
     });
 
-    // =========================
+  
     // TYPING ANIMATION (Slows Down)
-    // =========================
     const staticText = document.getElementById('static-text');
     const typedText = document.getElementById('typed-text');
-    const phrases = ["John Ian Ormides", "a 3rd Year BSIT Student"];
+    const phrases = [" John Ian Ormides", "a 3rd Year BSIT Student"];
     let phraseIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
