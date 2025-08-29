@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     alert("Welcome! Thanks for visiting my profile.");
 
-    // COLOR CHANGE (On Button Click Only)
     const nameHeading = document.querySelector('.name');
     const colors = ['#fff176','#40c4ff', '#ffd700', '#ff80ab', '#b2ff59'];
     let colorIndex = 0;
@@ -11,8 +10,6 @@ document.addEventListener('DOMContentLoaded', function () {
         nameHeading.style.color = colors[colorIndex];
         colorIndex = (colorIndex + 1) % colors.length;
     });
-
-  
     // TYPING ANIMATION (Slows Down)
     const staticText = document.getElementById('static-text');
     const typedText = document.getElementById('typed-text');
@@ -21,9 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let charIndex = 0;
     let isDeleting = false;
 
-    // Blinking cursor
-
-    // Blink keyframes
     const style = document.createElement("style");
     style.innerHTML = `
         .blink-cursor {
@@ -44,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
             charIndex++;
             if (charIndex === currentPhrase.length) {
                 isDeleting = true;
-                setTimeout(typeEffect, 1200); // pause before deleting
+                setTimeout(typeEffect, 1200);
                 return;
             }
         } else {
@@ -59,8 +53,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Speed control: start fast, slow down as it progresses
         let progress = charIndex / currentPhrase.length;
-        let baseSpeed = isDeleting ? 40 : 70;   // starting speed
-        let maxExtra = isDeleting ? 50 : 150;   // how much slower it can get
+        let baseSpeed = isDeleting ? 40 : 70;   
+        let maxExtra = isDeleting ? 50 : 150;  
         let speed = baseSpeed + (progress * maxExtra);
 
         setTimeout(typeEffect, speed);
@@ -69,3 +63,4 @@ document.addEventListener('DOMContentLoaded', function () {
     staticText.textContent = "Hello I'm ";
     typeEffect();
 });
+
