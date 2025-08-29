@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // COLOR CHANGE (On Button Click Only)
     const nameHeading = document.querySelector('.name');
-    const colors = ['#e8eef6', '#fff176','#40c4ff', '#ffd700', '#ff80ab', '#b2ff59'];
+    const colors = ['#fff176','#40c4ff', '#ffd700', '#ff80ab', '#b2ff59'];
     let colorIndex = 0;
 
     document.getElementById('color-btn').addEventListener('click', function () {
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
             charIndex++;
             if (charIndex === currentPhrase.length) {
                 isDeleting = true;
-                setTimeout(typeEffect, 1200); // pause before deleting
+                setTimeout(typeEffect, 1200);
                 return;
             }
         } else {
