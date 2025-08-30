@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
         nameHeading.style.color = colors[colorIndex];
         colorIndex = (colorIndex + 1) % colors.length;
     });
-    // TYPING ANIMATION (Slows Down)
+    // TYPING ANIMATION 
     const staticText = document.getElementById('static-text');
     const typedText = document.getElementById('typed-text');
     const phrases = ["John Ian Ormides", "a 3rd Year BSIT Student"];
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        // Speed control: start fast, slow down as it progresses
+        // Speed control
         let progress = charIndex / currentPhrase.length;
         let baseSpeed = isDeleting ? 40 : 70;   
         let maxExtra = isDeleting ? 50 : 150;  
@@ -63,4 +63,5 @@ document.addEventListener('DOMContentLoaded', function () {
     staticText.textContent = "Hello I'm ";
     typeEffect();
 });
+
 
