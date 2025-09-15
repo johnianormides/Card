@@ -6,13 +6,38 @@
     <title>John Ian Ormides | Digital Business Card</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">JIO</div>
+            <div class="hamburger-menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div id="greeting-banner">
+        <p id="greeting-text">Welcome to my profile!</p>
+    </div>
+    
+    <div class="theme-toggle">
+    <button id="theme-btn"><i class="fas fa-sun"></i></button>
+</div>
+    
+    <div class="container" id="home">
         <div class="profile-area">
-            <img src="Image/ian.png" alt="Profile Picture" class="profile-pic">
+            <img src="Image/ian.jpg" alt="Profile Picture" class="profile-pic">
             <h1 class="name" id="name-area">
-                <span id="static-text"></span><span id="typed-text"></span>
+                I am John Ian S. Ormides
             </h1>
             <div class="accent-bar"></div>
         </div>
@@ -21,25 +46,62 @@
                 <p id="bio-text">I am a passionate IT Student at Gordon College dedicated to delivering innovative solutions and driving digital transformation. As an aspiring UI/UX Designer, I thrive in dynamic environments and love collaborating with creative teams.</p>
                 <button id="color-btn">Click Me!</button>
             </section>
-            <section class="social-section">
+            <section class="social-section" id="about">
                 <h2>Connect with me:</h2>
                 <div class="social-links">
-                    <a href="https://github.com/johnianormides" class="social-btn" title="GitHub" target="_blank">
-                        <img src="Image/github.png" alt="GitHub">
+                    <a href="https://github.com/johnianormides" class="social-card" title="GitHub" target="_blank">
+                        <div class="social-icon">
+                            <img src="Image/github.png" alt="GitHub">
+                        </div>
+                        <span class="social-name">GitHub</span>
                     </a>
-                    <a href="https://www.linkedin.com/in/john-ian-ormides-b9a723308" class="social-btn" title="LinkedIn" target="_blank">
-                        <img src="Image/linkedin.png" alt="LinkedIn">
+                    <a href="https://www.linkedin.com/in/john-ian-ormides-b9a723308" class="social-card" title="LinkedIn" target="_blank">
+                        <div class="social-icon">
+                            <img src="Image/linkedin.png" alt="LinkedIn">
+                        </div>
+                        <span class="social-name">LinkedIn</span>
                     </a>
-                    <a href="https://trello.com/u/johnianormides1/boards" class="social-btn" title="Trello" target="_blank">
-                        <img src="Image/trello.png" alt="Trello">
+                    <a href="https://trello.com/u/johnianormides1/boards" class="social-card" title="Trello" target="_blank">
+                        <div class="social-icon">
+                            <img src="Image/trello.png" alt="Trello">
+                        </div>
+                        <span class="social-name">Trello</span>
                     </a>
-                    <a href="https://www.facebook.com/Johnianormides" class="social-btn" title="Facebook" target="_blank">
-                        <img src="Image/facebook.png" alt="Facebook">
+                    <a href="https://www.facebook.com/Johnianormides" class="social-card" title="Facebook" target="_blank">
+                        <div class="social-icon">
+                            <img src="Image/facebook.png" alt="Facebook">
+                        </div>
+                        <span class="social-name">Facebook</span>
                     </a>
-                    <a href="https://www.instagram.com/jjohneeann.jpg" class="social-btn" title="Instagram" target="_blank">
-                        <img src="Image/instagram.png" alt="Instagram">
+                    <a href="https://www.instagram.com/jjohneeann.jpg" class="social-card" title="Instagram" target="_blank">
+                        <div class="social-icon">
+                            <img src="Image/instagram.png" alt="Instagram">
+                        </div>
+                        <span class="social-name">Instagram</span>
                     </a>
                 </div>
+            </section>
+            
+            <section class="contact-section" id="contact">
+                <h2>Get in Touch</h2>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your name" required>
+                        <span class="error-message" id="name-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Your email" required>
+                        <span class="error-message" id="email-error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Your message" rows="4" required></textarea>
+                        <span class="error-message" id="message-error"></span>
+                    </div>
+                    <button type="submit" id="submit-btn">Send Message</button>
+                </form>
             </section>
         </div>
     </div>
