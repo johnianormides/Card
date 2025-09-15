@@ -1,67 +1,142 @@
-document.addEventListener('DOMContentLoaded', function () {
-    alert("Welcome! Thanks for visiting my profile.");
-
-    const nameHeading = document.querySelector('.name');
-    const colors = ['#fff176','#40c4ff', '#ffd700', '#ff80ab', '#b2ff59'];
-    let colorIndex = 0;
-
-    document.getElementById('color-btn').addEventListener('click', function () {
-        nameHeading.style.transition = "color 0.8s ease-in-out";
-        nameHeading.style.color = colors[colorIndex];
-        colorIndex = (colorIndex + 1) % colors.length;
-    });
-    // TYPING ANIMATION 
-    const staticText = document.getElementById('static-text');
-    const typedText = document.getElementById('typed-text');
-    const phrases = ["John Ian Ormides", "a 3rd Year BSIT Student"];
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-
-    const style = document.createElement("style");
-    style.innerHTML = `
-        .blink-cursor {
-            animation: blink 1s steps(1) infinite;
-        }
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-    `;
-    document.head.appendChild(style);
-
-    function typeEffect() {
-        const currentPhrase = phrases[phraseIndex];
-
-        if (!isDeleting) {
-            // Typing
-            typedText.innerHTML = currentPhrase.substring(0, charIndex + 1) + '<span class="blink-cursor">|</span>';
-            charIndex++;
-            if (charIndex === currentPhrase.length) {
-                isDeleting = true;
-                setTimeout(typeEffect, 1200);
-                return;
-            }
-        } else {
-            // Deleting
-            typedText.innerHTML = currentPhrase.substring(0, charIndex - 1) + '<span class="blink-cursor">|</span>';
-            charIndex--;
-            if (charIndex === 0) {
-                isDeleting = false;
-                phraseIndex = (phraseIndex + 1) % phrases.length;
-            }
-        }
-
-        // Speed control
-        let progress = charIndex / currentPhrase.length;
-        let baseSpeed = isDeleting ? 40 : 70;   
-        let maxExtra = isDeleting ? 50 : 150;  
-        let speed = baseSpeed + (progress * maxExtra);
-
-        setTimeout(typeEffect, speed);
+document.addEventListener('DOMContentLoaded', function() {
+    // Dynamic greeting based on time of day
+    const greeting = document.getElementById('greeting-text');
+    const hour = new Date().getHours();
+    let greetingText = '';
+    
+    if (hour >= 5 && hour < 12) {
+        greetingText = 'Good Morning';
+    } else if (hour >= 12 && hour < 18) {
+        greetingText = 'Good Afternoon';
+    } else {
+        greetingText = 'Good Evening';
     }
-
-    staticText.textContent = "Hello I'm ";
-    typeEffect();
+    
+    if (greeting) {
+        greeting.textContent = `${greetingText}, Welcome to my Profile!`;
+    }
+    
+    // Hamburger menu functionality
+    const hamburger = document.querySelector('.hamburger-menu');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+    
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        });
+    });
+    
+    // Color changing functionality
+    const nameHeading = document.querySelector('.name');
+    const colors = ['var(--accent-color)', '#f472b6', '#a78bfa', '#fb923c', '#4ade80'];
+    let colorIndex = 0;
+    
+    document.getElementById('color-btn').addEventListener('click', function() {
+        colorIndex = (colorIndex + 1) % colors.length;
+        nameHeading.style.transition = 'background 0.5s ease';
+        
+        // Create a gradient based on the selected color
+        const isDarkMode = !document.body.classList.contains('light-theme');
+        const endColor = isDarkMode ? '#ffffff' : '#0f172a';
+        nameHeading.style.background = `linear-gradient(90deg, ${colors[colorIndex]} 0%, ${endColor} 100%)`;
+        nameHeading.style.webkitBackgroundClip = 'text';
+        nameHeading.style.webkitTextFillColor = 'transparent';
+        nameHeading.style.backgroundClip = 'text';
+    });
+    
+    // Theme toggle (dark mode is default)
+    const themeBtn = document.getElementById('theme-btn');
+    const body = document.body;
+    const icon = themeBtn.querySelector('i');
+    
+    // Check for saved theme preference
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'light') {
+        body.classList.add('light-theme');
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+    } else {
+        // Set dark mode as default
+        localStorage.setItem('theme', 'dark');
+    }
+    
+    themeBtn.addEventListener('click', function() {
+        console.log('Theme button clicked');
+        body.classList.toggle('light-theme');
+        
+        // Update icon
+        if (body.classList.contains('light-theme')) {
+            console.log('Switching to light theme');
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+            localStorage.setItem('theme', 'light');
+        } else {
+            console.log('Switching to dark theme');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+            localStorage.setItem('theme', 'dark');
+        }
+    });
+    
+    // Form validation
+    const contactForm = document.getElementById('contact-form');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const messageInput = document.getElementById('message');
+    const nameError = document.getElementById('name-error');
+    const emailError = document.getElementById('email-error');
+    const messageError = document.getElementById('message-error');
+    
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+    
+    function validateForm() {
+        let isValid = true;
+        
+        // Reset errors
+        nameError.textContent = '';
+        emailError.textContent = '';
+        messageError.textContent = '';
+        
+        // Validate name
+        if (nameInput.value.trim() === '') {
+            nameError.textContent = 'Name is required';
+            isValid = false;
+        }
+        
+        // Validate email
+        if (emailInput.value.trim() === '') {
+            emailError.textContent = 'Email is required';
+            isValid = false;
+        } else if (!validateEmail(emailInput.value.trim())) {
+            emailError.textContent = 'Please enter a valid email';
+            isValid = false;
+        }
+        
+        // Validate message
+        if (messageInput.value.trim() === '') {
+            messageError.textContent = 'Message is required';
+            isValid = false;
+        }
+        
+        return isValid;
+    }
+    
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (validateForm()) {
+            alert('Message sent successfully!');
+            contactForm.reset();
+        }
+    });
 });
-
 
