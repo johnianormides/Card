@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function() {
         greeting.textContent = `${greetingText}, Welcome to my Profile!`;
     }
     
-    // Hamburger menu functionality
     const hamburger = document.querySelector('.hamburger-menu');
     const navMenu = document.querySelector('.nav-menu');
     
@@ -32,7 +31,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Color changing functionality
     const nameHeading = document.querySelector('.name');
     const colors = ['var(--accent-color)', '#f472b6', '#a78bfa', '#fb923c', '#4ade80'];
     let colorIndex = 0;
@@ -41,7 +39,6 @@ document.addEventListener('DOMContentLoaded', function() {
         colorIndex = (colorIndex + 1) % colors.length;
         nameHeading.style.transition = 'background 0.5s ease';
         
-        // Create a gradient based on the selected color
         const isDarkMode = !document.body.classList.contains('light-theme');
         const endColor = isDarkMode ? '#ffffff' : '#0f172a';
         nameHeading.style.background = `linear-gradient(90deg, ${colors[colorIndex]} 0%, ${endColor} 100%)`;
@@ -62,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function() {
         icon.classList.remove('fa-sun');
         icon.classList.add('fa-moon');
     } else {
-        // Set dark mode as default
         localStorage.setItem('theme', 'dark');
     }
     
@@ -70,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Theme button clicked');
         body.classList.toggle('light-theme');
         
-        // Update icon
         if (body.classList.contains('light-theme')) {
             console.log('Switching to light theme');
             icon.classList.remove('fa-sun');
@@ -84,7 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Form validation
     const contactForm = document.getElementById('contact-form');
     const nameInput = document.getElementById('name');
     const emailInput = document.getElementById('email');
@@ -101,18 +95,15 @@ document.addEventListener('DOMContentLoaded', function() {
     function validateForm() {
         let isValid = true;
         
-        // Reset errors
         nameError.textContent = '';
         emailError.textContent = '';
         messageError.textContent = '';
         
-        // Validate name
         if (nameInput.value.trim() === '') {
             nameError.textContent = 'Name is required';
             isValid = false;
         }
         
-        // Validate email
         if (emailInput.value.trim() === '') {
             emailError.textContent = 'Email is required';
             isValid = false;
@@ -121,7 +112,6 @@ document.addEventListener('DOMContentLoaded', function() {
             isValid = false;
         }
         
-        // Validate message
         if (messageInput.value.trim() === '') {
             messageError.textContent = 'Message is required';
             isValid = false;
@@ -139,4 +129,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
 
